@@ -1,0 +1,11 @@
+# Sistema / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+
+# Node (por si luego agregas herramientas de build)
+node_modules/
+
+# Temporales
+*.tmp
