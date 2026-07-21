@@ -45,9 +45,11 @@
       ? `<div class="pcard__sizes" data-sizes="${p.id}">${p.sizes.map(s =>
           `<span class="size-pill ${selectedSize[p.id] === String(s) ? "sel" : ""}" data-size="${s}">${s}</span>`).join("")}</div>`
       : "";
-    const meta = p.note
-      ? `<div class="pcard__meta">${p.note}</div>`
-      : (p.cat === "medusa" ? `<div class="pcard__meta">Mezclilla premium · ${p.tipo}</div>` : "");
+    const meta = p.desc
+      ? `<div class="pcard__meta">${p.desc}</div>`
+      : (p.note
+        ? `<div class="pcard__meta">${p.note}</div>`
+        : (p.cat === "medusa" ? `<div class="pcard__meta">Mezclilla premium · ${p.tipo}</div>` : ""));
     return `
       <article class="pcard reveal ${i % 3 === 1 ? "d1" : i % 3 === 2 ? "d2" : ""}" data-id="${p.id}">
         <div class="pcard__media">
@@ -419,13 +421,66 @@
     }
   }
 
+  /* ---------- Contenido dinámico (panel /admin) ---------- */
+  async function loadContent() {
+    try {
+      const r = await fetch("/api/content", { cache: "no-store" });
+      if (!r.ok) return;
+      const c = await r.json();
+      if (c && Array.isArray(c.products) && c.products.length) PRODUCTS = c.products.map(normalizeProduct);
+      if (c && Array.isArray(c.catalogs)) CATALOGS = c.catalogs;
+    } catch (e) { /* sin API disponible: usa el catálogo incluido */ }
+  }
+  function normalizeProduct(p) {
+    return {
+      id: p.id || ("p" + Math.random().toString(36).slice(2)),
+      cat: p.cat || "medusa", code: p.code || "", tipo: p.tipo || "",
+      name: p.name || "Producto", desc: p.desc || null,
+      sizes: Array.isArray(p.sizes) && p.sizes.length ? p.sizes : null,
+      note: p.note || null, featured: !!p.featured, img: p.img || null
+    };
+  }
+  function escapeHTML(s) { return String(s).replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m])); }
+
+  /* ---------- Catálogos PDF ---------- */
+  function renderCatalogs() {
+    const sec = $("#catalogos"), grid = $("#catalogsGrid");
+    if (!grid) return;
+    if (!CATALOGS.length) { if (sec) sec.style.display = "none"; return; }
+    if (sec) sec.style.display = "";
+    grid.innerHTML = CATALOGS.map((c, i) => `
+      <article class="cat-pdf reveal ${i % 3 === 1 ? "d1" : i % 3 === 2 ? "d2" : ""}">
+        <div class="cat-pdf__ic">📕</div>
+        <div class="cat-pdf__body">
+          <h3>${escapeHTML(c.title || "Catálogo")}</h3>
+          <span>Documento PDF</span>
+        </div>
+        <button class="btn btn-gold btn-sm" data-pdf="${encodeURI(c.url || "")}">Ver catálogo</button>
+      </article>`).join("");
+    $$("[data-pdf]", grid).forEach(b => b.addEventListener("click", () => openPdf(b.dataset.pdf)));
+    observeReveal($$("#catalogsGrid .reveal"));
+  }
+  function openPdf(url) {
+    if (!url) return;
+    const ov = $("#pdfModal");
+    if (!ov) { window.open(url, "_blank"); return; }
+    $("#pdfFrame").src = url; $("#pdfOpen").href = url;
+    ov.classList.add("show"); document.body.style.overflow = "hidden";
+  }
+  function closePdf() {
+    const ov = $("#pdfModal"); if (!ov) return;
+    ov.classList.remove("show"); $("#pdfFrame").src = "about:blank"; document.body.style.overflow = "";
+  }
+
   /* ---------- Init ---------- */
-  function init() {
+  async function init() {
+    await loadContent();
     const yr = $("#year"); if (yr) yr.textContent = new Date().getFullYear();
 
     if ($("#catsGrid")) renderCats();
     if ($("#faq")) renderFAQ();
     if ($("#featuredGrid")) renderFeatured();
+    if ($("#catalogsGrid")) renderCatalogs();
 
     if ($("#grid")) { // Página de tienda
       const c = new URLSearchParams(window.location.search).get("cat");
@@ -460,6 +515,8 @@
     $$("#mobileMenu a").forEach(a => a.addEventListener("click", () => $("#mobileMenu").classList.remove("show")));
 
     on("#toTop", "click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    on("#pdfClose", "click", closePdf);
+    on("#pdfModalBg", "click", closePdf);
 
     initMusic();
 

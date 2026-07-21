@@ -1,0 +1,23 @@
+# Ejemplo de configuración para Cloudflare (opcional, si usas Wrangler CLI).
+# Si despliegas con Git desde el panel, NO necesitas este archivo:
+# configura los enlaces (bindings) desde el panel (ver SETUP-DASHBOARD.md).
+#
+# Para usarlo con Wrangler: copia este archivo como "wrangler.toml" y rellena los IDs.
+
+name = "maboutique"
+pages_build_output_dir = "."
+
+# --- Base de datos KV (contenido de la tienda) ---
+[[kv_namespaces]]
+binding = "MA_KV"
+id = "PON_AQUI_EL_ID_DE_TU_NAMESPACE_KV"
+
+# --- Bucket R2 (fotos y PDFs) ---
+[[r2_buckets]]
+binding = "MA_R2"
+bucket_name = "maboutique-media"
+
+# --- Variable de entorno (contraseña del panel) ---
+# Mejor configúrala como SECRET en el panel en vez de aquí.
+# [vars]
+# ADMIN_PASSWORD = "m&Aboutiqu3"

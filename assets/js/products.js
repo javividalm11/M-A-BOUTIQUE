@@ -160,4 +160,6 @@ function buildCatalog() {
   return out;
 }
 
-const PRODUCTS = buildCatalog();
+// Mutables: la tienda puede sobrescribirlos con el contenido del panel (/api/content).
+var PRODUCTS = buildCatalog();
+var CATALOGS = [];

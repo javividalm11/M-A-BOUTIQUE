@@ -97,8 +97,8 @@
     <nav class="nav__links" aria-label="Principal">
       <a href="#categorias">Categorías</a>
       <a href="tienda.html">Tienda</a>
+      <a href="#catalogos">Catálogos</a>
       <a href="#comprar">Cómo comprar</a>
-      <a href="#opiniones">Opiniones</a>
       <a href="#faq">FAQ</a>
     </nav>
     <div class="nav__actions">
@@ -118,8 +118,8 @@
   <button class="mm-close" id="mmClose" aria-label="Cerrar">&times;</button>
   <a href="#categorias">Categorías</a>
   <a href="tienda.html">Tienda</a>
+  <a href="#catalogos">Catálogos</a>
   <a href="#comprar">Cómo comprar</a>
-  <a href="#opiniones">Opiniones</a>
   <a href="#faq">FAQ</a>
 </div>
 
@@ -196,6 +196,18 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       </div>
+    </div>
+  </section>
+
+  <!-- ============ Catálogos PDF ============ -->
+  <section class="section" id="catalogos" style="padding-top:0;display:none">
+    <div class="container">
+      <div class="center" style="max-width:640px">
+        <span class="eyebrow reveal">Explóralos</span>
+        <h2 class="section-title reveal d1">Nuestros <span class="accent">catálogos</span></h2>
+        <p class="section-sub center reveal d2">Revisa los catálogos completos en PDF y arma tu pedido con lo que más te guste.</p>
+      </div>
+      <div class="catalogs" id="catalogsGrid"></div>
     </div>
   </section>
 
@@ -335,7 +347,7 @@
     </div>
     <div class="footer__bar">
       <span>© <span id="year"></span> M&A Boutique. Todos los derechos reservados.</span>
-      <span>Hecho con 💛 en México · Marcas mencionadas propiedad de sus titulares.</span>
+      <span>Hecho con 💛 en México · Marcas mencionadas propiedad de sus titulares. · <a href="admin.html" style="color:inherit;text-decoration:underline">Administrar</a></span>
     </div>
   </div>
 </footer>
@@ -383,6 +395,21 @@
     <p class="drawer__note">Tu pedido se enviará listo a nuestro WhatsApp. Confirmamos precio y disponibilidad antes de pagar.</p>
   </div>
 </aside>
+
+<!-- Visor de catálogo PDF -->
+<div class="pdf-modal" id="pdfModal">
+  <div class="pdf-modal__bg" id="pdfModalBg"></div>
+  <div class="pdf-modal__box">
+    <div class="pdf-modal__head">
+      <span>📕 Catálogo</span>
+      <div class="pdf-modal__actions">
+        <a class="btn btn-ghost btn-sm" id="pdfOpen" href="#" target="_blank" rel="noopener">Abrir en pestaña ↗</a>
+        <button class="icon-btn" id="pdfClose" aria-label="Cerrar">✕</button>
+      </div>
+    </div>
+    <iframe id="pdfFrame" title="Catálogo PDF" src="about:blank"></iframe>
+  </div>
+</div>
 
 <div class="toast-wrap" id="toastWrap"></div>
 

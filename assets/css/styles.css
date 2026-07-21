@@ -558,6 +558,78 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.1;lett
 .mobile-menu a{font-family:var(--font-display);font-size:1.8rem;padding:14px 0;border-bottom:1px solid var(--line)}
 .mobile-menu .mm-close{position:absolute;top:24px;right:24px;font-size:2rem;color:var(--muted)}
 
+/* -------------------- Catálogos PDF -------------------- */
+.catalogs{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px;margin-top:40px}
+.cat-pdf{display:flex;align-items:center;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;transition:.4s var(--ease);box-shadow:0 12px 34px -26px rgba(183,110,121,.5)}
+.cat-pdf:hover{transform:translateY(-4px);border-color:var(--rose);box-shadow:var(--shadow)}
+.cat-pdf__ic{font-size:1.8rem;width:56px;height:56px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,var(--blush),#fff);border:1px solid var(--line-strong);flex-shrink:0}
+.cat-pdf__body{flex:1;min-width:0}
+.cat-pdf__body h3{font-family:var(--font-display);font-size:1.15rem;line-height:1.15}
+.cat-pdf__body span{font-size:.78rem;color:var(--muted)}
+
+/* Visor PDF */
+.pdf-modal{position:fixed;inset:0;z-index:120;display:none;align-items:center;justify-content:center;padding:20px}
+.pdf-modal.show{display:flex}
+.pdf-modal__bg{position:absolute;inset:0;background:rgba(64,48,58,.6);backdrop-filter:blur(4px)}
+.pdf-modal__box{position:relative;width:min(900px,100%);height:min(88vh,100%);background:var(--surface);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow);border:1px solid var(--line-strong)}
+.pdf-modal__head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);font-family:var(--font-display);font-size:1.05rem}
+.pdf-modal__actions{display:flex;align-items:center;gap:10px}
+.pdf-modal iframe{flex:1;width:100%;border:0;background:#fff}
+
+/* -------------------- Dashboard (admin) -------------------- */
+body.admin{background:var(--bg-2)}
+.admin-login{min-height:100vh;display:grid;place-items:center;padding:24px}
+.admin-card{width:min(400px,100%);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:34px;box-shadow:var(--shadow);text-align:center}
+.admin-card .brand__logo{display:block;width:130px;height:130px;margin:0 auto 10px;background:none;box-shadow:none;border-radius:0}
+.admin-card .brand__logo img{object-fit:contain;transform:none}
+.admin-card h1{font-size:1.6rem;margin-bottom:6px}
+.admin-card .sub{color:var(--muted);font-size:.9rem;margin-bottom:20px}
+.admin-card input{width:100%;padding:13px 16px;border-radius:12px;border:1px solid var(--line);background:#fff;font-family:inherit;font-size:.95rem}
+.admin-card input:focus{outline:none;border-color:var(--rose)}
+.admin-card .err{color:var(--rose-2);font-size:.85rem;min-height:1.2em;margin-top:10px}
+.admin-app{max-width:1100px;margin:0 auto;padding:16px 20px 60px}
+.admin-top{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;background:var(--bg-2);padding:14px 2px;border-bottom:1px solid var(--line);margin-bottom:16px}
+.admin-top .brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-size:1.25rem}
+.admin-top .actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.admin-top .save-state{font-size:.78rem;color:var(--muted);margin-right:4px}
+.admin-tabs{display:flex;gap:8px;margin-bottom:18px}
+.admin-tabs button{padding:9px 18px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--muted);font-weight:600;font-size:.88rem;transition:.2s;cursor:pointer}
+.admin-tabs button.active{background:linear-gradient(120deg,var(--gold-2),var(--gold));color:#fff;border-color:transparent}
+.admin-toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.admin-toolbar select,.admin-toolbar input{padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:#fff;font-family:inherit;font-size:.88rem}
+.admin-toolbar input{flex:1;min-width:160px}
+.admin-list{display:grid;gap:10px}
+.arow{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.arow__thumb{width:52px;height:66px;border-radius:8px;overflow:hidden;flex-shrink:0;background:linear-gradient(135deg,var(--blush),#fff);display:grid;place-items:center;font-size:.58rem;color:var(--muted);position:relative;text-align:center}
+.arow__thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.arow__info{flex:1;min-width:0}
+.arow__info b{font-family:var(--font-display);font-size:1rem;display:block;line-height:1.2}
+.arow__info .tag{font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-deep);font-weight:600}
+.arow__info .meta{font-size:.76rem;color:var(--muted)}
+.arow__actions{display:flex;gap:6px;flex-shrink:0}
+.mini{padding:7px 12px;border-radius:9px;border:1px solid var(--line);background:#fff;font-size:.8rem;font-weight:600;transition:.2s;cursor:pointer}
+.mini:hover{border-color:var(--rose)}
+.mini.danger{color:var(--rose-2)}
+.mini.danger:hover{background:var(--blush)}
+.admin-empty{text-align:center;color:var(--muted);padding:40px 10px}
+.admin-modal{position:fixed;inset:0;z-index:130;display:none;align-items:center;justify-content:center;padding:20px}
+.admin-modal.show{display:flex}
+.admin-modal__bg{position:absolute;inset:0;background:rgba(64,48,58,.55);backdrop-filter:blur(4px)}
+.admin-modal__box{position:relative;width:min(560px,100%);max-height:90vh;overflow:auto;background:var(--surface);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);border:1px solid var(--line-strong)}
+.admin-modal__box h3{font-size:1.3rem;margin-bottom:16px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:.78rem;font-weight:600;color:var(--muted);margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;padding:11px 14px;border-radius:10px;border:1px solid var(--line);background:#fff;font-family:inherit;font-size:.9rem}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--rose)}
+.field textarea{min-height:70px;resize:vertical}
+.field-row{display:flex;gap:14px}
+.field-row>.field{flex:1}
+.field-check{display:flex;align-items:center;gap:8px;font-size:.9rem}
+.field-check input{width:auto}
+.up-preview{width:84px;height:108px;border-radius:10px;overflow:hidden;background:var(--blush);display:grid;place-items:center;font-size:.68rem;color:var(--muted);margin-top:8px;position:relative}
+.up-preview img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.modal-foot{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}
+
 /* -------------------- Responsive -------------------- */
 
 /* Tablet y menores: menú hamburguesa + hero sin visual 3D */
