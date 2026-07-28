@@ -1,6 +1,6 @@
 /* =============================================================
    M&A BOUTIQUE — Panel de administración
-   Requiere las Functions de Cloudflare (/api/*) + KV (MA_KV) + R2 (MA_R2).
+   Requiere las Functions de Cloudflare (/api/*) + KV (MA_KV). Sin R2, sin tarjeta.
    ============================================================= */
 (function () {
   "use strict";
